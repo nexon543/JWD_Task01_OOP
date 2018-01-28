@@ -12,6 +12,7 @@ public class ApplianceServiceImpl implements ApplianceService{
 	@Override
 	public <E> Appliance find(Criteria<E> criteria) {
 		if (!Validator.criteriaValidator(criteria)) {
+			
 			return null;
 		}
 		
