@@ -1,5 +1,9 @@
 package by.tc.task01.service.impl;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import by.tc.task01.dao.ApplianceDAO;
 import by.tc.task01.dao.DAOFactory;
 import by.tc.task01.entity.Appliance;
@@ -9,23 +13,21 @@ import by.tc.task01.service.validation.Validator;
 
 public class ApplianceServiceImpl implements ApplianceService{
 
-	@Override
-	public <E> Appliance find(Criteria<E> criteria) {
+	public <E> List<Appliance> find(Criteria<E> criteria) {
 		if (!Validator.criteriaValidator(criteria)) {
-			
 			return null;
 		}
-		
+		List<Appliance> appliances=new ArrayList<Appliance>();
 		DAOFactory factory = DAOFactory.getInstance();
 		ApplianceDAO applianceDAO = factory.getApplianceDAO();
+		try {
+			appliances = applianceDAO.find(criteria);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		Appliance appliance = applianceDAO.find(criteria);
-		
-		// you may add your own code here
-		
-		return appliance;
+		return appliances;
 	}
 
 }
-
-//you may add your own new classes
