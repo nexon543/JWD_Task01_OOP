@@ -4,23 +4,17 @@ package by.tc.task01.main;
 
 import java.util.List;
 
-import by.tc.task01.dao.ApplianceDAO;
-import by.tc.task01.dao.DAOFactory;
-import by.tc.task01.dao.impl.ApplianceDAOImpl;
 import by.tc.task01.entity.Appliance;
 import by.tc.task01.entity.criteria.Criteria;
 import by.tc.task01.entity.criteria.SearchCriteria;
 import by.tc.task01.service.ApplianceService;
 import by.tc.task01.service.ServiceFactory;
-import by.tc.task01.entity.criteria.SearchCriteria.*;
-import by.tc.task01.entity.Laptop;
 
 public class Main {
 
 	public static void main(String[] args) {
 		List<Appliance> appliances;
 
-		DAOFactory daoFactory=DAOFactory.getInstance();
 		ServiceFactory factory = ServiceFactory.getInstance();
 		ApplianceService service = factory.getApplianceService();
 
@@ -32,17 +26,15 @@ public class Main {
 		criteriaLaptop.add(SearchCriteria.Laptop.CPU, 1.2);
 		appliances = service.find(criteriaLaptop);
 
-		Criteria<Oven> criteriaOven = new Criteria<Oven>();
+		PrintApplianceInfo.printAll(appliances);
+		
+		/*Criteria<Oven> criteriaOven = new Criteria<Oven>();
 		criteriaOven.setApplianceType("Oven");
 		criteriaOven.add(Oven.CAPACITY, 3);
 		criteriaOven.add(Oven.DEPTH, 3);
 
 		appliances = service.find(criteriaOven);
-		for (Appliance appliance:appliances) {
-		if(appliance.getClass() == by.tc.task01.entity.Oven.class) {}
-		by.tc.task01.entity.Oven oven = (by.tc.task01.entity.Oven) appliance;
-		PrintApplianceInfo.print(oven);
-		}
+		PrintApplianceInfo.printAll(appliances);
 
 		//////////////////////////////////////////////////////////////////
 
@@ -69,7 +61,7 @@ public class Main {
 		for (Appliance appliance:appliances) {
 			PrintApplianceInfo.print(appliance);
 		}
-
+*/
 	}
 
 }

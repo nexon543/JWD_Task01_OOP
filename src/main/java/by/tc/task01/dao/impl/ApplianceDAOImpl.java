@@ -14,13 +14,13 @@ import java.util.List;
 import java.util.Map;
 
 import by.tc.task01.dao.ApplianceDAO;
-import by.tc.task01.dao.parsing.ApplianceRecordParser;
-import by.tc.task01.dao.parsing.ApplianceRecordParserImpl;
 import by.tc.task01.entity.Appliance;
 import by.tc.task01.entity.criteria.Criteria;
 import by.tc.task01.entity.factory.ApplianceFactory;
 import by.tc.task01.util.PropertyManager;
 import by.tc.task01.util.PropertyManagerImpl;
+import by.tc.task01.util.appliance_parser.ApplianceRecordParser;
+import by.tc.task01.util.appliance_parser.ApplianceRecordParserImpl;
 
 public class ApplianceDAOImpl implements ApplianceDAO, AutoCloseable{
 
@@ -41,8 +41,10 @@ public class ApplianceDAOImpl implements ApplianceDAO, AutoCloseable{
 			if(!applianceRecord.trim().equals("")){
 				Map <String, String> applianceProperties=applianceRecordParser.parse(applianceRecord);
 				Appliance appliance=applianceFactory.getAppliance(applianceProperties);
-				if (appliance!=null)
+				boolean isValid=criteria.checkApplianceCriteria(applianceProperties);
+				if (isValid){
 					appliances.add(appliance);
+				}
 			}
 		}
 		return appliances;

@@ -6,6 +6,7 @@ import java.util.Map;
 import by.tc.task01.entity.Appliance;
 import by.tc.task01.entity.Laptop;
 import by.tc.task01.entity.Oven;
+import by.tc.task01.entity.Refrigerator;
 
 public class ApplianceFactory {
 	
@@ -14,18 +15,24 @@ public class ApplianceFactory {
 	private ApplianceFactory() {}
 	
 	public Appliance getAppliance(Map<String, String> properties) {
-		String applianceName=properties.get("applianceType");
-		switch (applianceName) {
-		case "Laptop": 
-			Laptop laptop=new Laptop();
-			laptop.initFieldsByProperties(properties);
-			return laptop;
-		/*case "Oven": 
-			Oven oven=new Oven();
-			oven.initFieldsByProperties(properties);
-			return oven; */
-		default: return null;
+		ApplianceType applianceType=ApplianceType.getApplianceType(properties.get("applianceType"));
+		Appliance appliance=null;
+		switch (applianceType) {
+		case LAPTOP: 
+			appliance=new Laptop();
+			appliance.initFieldsByProperties(properties);
+			break;
+		case OVEN: 
+			appliance=new Oven();
+			appliance.initFieldsByProperties(properties);
+			break;
+		case REFREGERATOR:
+			appliance=new Refrigerator();
+			appliance.initFieldsByProperties(properties);
+		default: throw new EnumConstantNotPresentException(ApplianceType.class, properties.get("applianceType"));
 		}
+		
+		return appliance;
 	}
 	
 	public static ApplianceFactory getInstance() {

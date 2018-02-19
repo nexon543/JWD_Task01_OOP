@@ -1,6 +1,5 @@
 package by.tc.task01.util;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public interface PropertyManager {

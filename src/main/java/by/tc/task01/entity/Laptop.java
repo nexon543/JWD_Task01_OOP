@@ -23,6 +23,7 @@ public class Laptop extends Appliance{
 	}
 	
 	public static Appliance create() {
+		//Laptop.propertyFieldType
 		return new Laptop();
 	}
 	protected void setInt (String fieldName, int value) {

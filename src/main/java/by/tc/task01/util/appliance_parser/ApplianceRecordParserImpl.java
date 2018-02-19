@@ -1,4 +1,4 @@
-package by.tc.task01.dao.parsing;
+package by.tc.task01.util.appliance_parser;
 
 import java.util.HashMap;
 import java.util.Map;
