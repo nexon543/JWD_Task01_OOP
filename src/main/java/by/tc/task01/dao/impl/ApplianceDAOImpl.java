@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import by.tc.task01.dao.ApplianceDAO;
+import by.tc.task01.dao.parsing.ApplianceRecordParser;
 import by.tc.task01.dao.parsing.ApplianceRecordParserImpl;
 import by.tc.task01.entity.Appliance;
 import by.tc.task01.entity.criteria.Criteria;
@@ -26,42 +27,41 @@ public class ApplianceDAOImpl implements ApplianceDAO, AutoCloseable{
 	ApplianceFactory applianceFactory;
 	ApplianceRecordParser applianceRecordParser;
 	SourceApplianceReader sourceApplianceReader;
-	{
+
+	public ApplianceDAOImpl() throws IOException {
 		sourceApplianceReader=new SourceApplianceReader();
 		applianceRecordParser=new ApplianceRecordParserImpl();
+		applianceFactory=ApplianceFactory.getInstance();
 	}
 	
 	public <E> List<Appliance> find(Criteria<E> criteria) throws IOException {
 		List<Appliance> appliances=new ArrayList<Appliance>();
 		String applianceRecord;
 		while ((applianceRecord=sourceApplianceReader.read())!=null){
-			applianceRecordParser(applianceRecord);
-			
+			if(!applianceRecord.trim().equals("")){
+				Map <String, String> applianceProperties=applianceRecordParser.parse(applianceRecord);
+				Appliance appliance=applianceFactory.getAppliance(applianceProperties);
+				if (appliance!=null)
+					appliances.add(appliance);
+			}
 		}
 		return appliances;
 	}
 
-
-	@Override
 	public void close() throws Exception {
 		sourceApplianceReader.close();
-		
 	}
 }
 
 
 
 class SourceNameReader {
-	public String read () {
+	public String read () throws IOException   {
 		String applianceDBPath=null;
-		try {
-			PropertyManager pm=new PropertyManagerImpl();
-			pm.setPropertiesSourceFile("config.properties");
-			applianceDBPath=pm.getProperty("applianceDBFile");
-			System.out.println(applianceDBPath);
-			
-		}
-		catch (Exception ex) {}
+		PropertyManager pm=new PropertyManagerImpl();
+		pm.setPropertiesSourceFile("config.properties");
+		applianceDBPath=pm.getProperty("applianceDBFile");
+		System.out.println(applianceDBPath);
 		return applianceDBPath;
 	}
 }
@@ -70,19 +70,12 @@ class SourceApplianceReader implements Closeable {
 	private String sourceName;
 	private BufferedReader fileReader;
 	
-	{ 
+	public SourceApplianceReader()  throws IOException {
 		SourceNameReader snr=new SourceNameReader();
 		sourceName=snr.read();
-		System.out.println(sourceName);
-		try {
-			fileReader=new BufferedReader (new FileReader(sourceName));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		
+		FileReader fr = new FileReader(sourceName);
+		fileReader=new BufferedReader (fr);
 	}
-	
-	
 	public String read() throws IOException {
 		if (fileReader == null) {
 			throw new FileNotFoundException();
@@ -95,8 +88,4 @@ class SourceApplianceReader implements Closeable {
 		fileReader.close();
 		
 	}
-}
-
-class ApplianceRecordParser {
-	
 }

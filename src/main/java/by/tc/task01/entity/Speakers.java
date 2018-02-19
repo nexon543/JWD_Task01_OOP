@@ -1,42 +1,42 @@
 package by.tc.task01.entity;
 
-public class Speakers implements Appliance{
-	int power_consumption;
-	int number_of_speakers;
-	int cord_length;
-	float freaquency_range;
-	public int getPower_consumption() {
-		return power_consumption;
+public class Speakers extends Appliance{
+	int powerConsumption;
+	int numberOfSpeakers;
+	int cordLength;
+	float freaquencyRange;
+	public int getPowerConsumption() {
+		return powerConsumption;
 	}
-	public void setPower_consumption(int power_consumption) {
-		this.power_consumption = power_consumption;
+	public void setPowerConsumption(int powerConsumption) {
+		this.powerConsumption = powerConsumption;
 	}
-	public int getNumber_of_speakers() {
-		return number_of_speakers;
+	public int getNumberOfSpeakers() {
+		return numberOfSpeakers;
 	}
-	public void setNumber_of_speakers(int number_of_speakers) {
-		this.number_of_speakers = number_of_speakers;
+	public void setNumberOfSpeakers(int numberOfSpeakers) {
+		this.numberOfSpeakers = numberOfSpeakers;
 	}
-	public int getCord_length() {
-		return cord_length;
+	public int getCordLength() {
+		return cordLength;
 	}
-	public void setCord_length(int cord_length) {
-		this.cord_length = cord_length;
+	public void setCordLength(int cordLength) {
+		this.cordLength = cordLength;
 	}
-	public float getFreaquency_range() {
-		return freaquency_range;
+	public float getFreaquencyRange() {
+		return freaquencyRange;
 	}
-	public void setFreaquency_range(float freaquency_range) {
-		this.freaquency_range = freaquency_range;
+	public void setFreaquencyRange(float freaquencyRange) {
+		this.freaquencyRange = freaquencyRange;
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + cord_length;
-		result = prime * result + Float.floatToIntBits(freaquency_range);
-		result = prime * result + number_of_speakers;
-		result = prime * result + power_consumption;
+		result = prime * result + cordLength;
+		result = prime * result + Float.floatToIntBits(freaquencyRange);
+		result = prime * result + numberOfSpeakers;
+		result = prime * result + powerConsumption;
 		return result;
 	}
 	@Override
@@ -45,23 +45,25 @@ public class Speakers implements Appliance{
 			return true;
 		if (obj == null)
 			return false;
-		if (obj.getClass()!=Speakers.class)
+		if (getClass() != obj.getClass())
 			return false;
 		Speakers other = (Speakers) obj;
-		if (cord_length != other.cord_length)
+		if (cordLength != other.cordLength)
 			return false;
-		if (Float.floatToIntBits(freaquency_range) != Float.floatToIntBits(other.freaquency_range))
+		if (Float.floatToIntBits(freaquencyRange) != Float.floatToIntBits(other.freaquencyRange))
 			return false;
-		if (number_of_speakers != other.number_of_speakers)
+		if (numberOfSpeakers != other.numberOfSpeakers)
 			return false;
-		if (power_consumption != other.power_consumption)
+		if (powerConsumption != other.powerConsumption)
 			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "Speakers [power_consumption=" + power_consumption + ", number_of_speakers=" + number_of_speakers
-				+ ", cord_length=" + cord_length + ", freaquency_range=" + freaquency_range + "]";
+		return "Speakers [powerConsumption=" + powerConsumption + ", numberOfSpeakers=" + numberOfSpeakers
+				+ ", cordLength=" + cordLength + ", freaquencyRange=" + freaquencyRange + "]";
 	}
+	
+	
 	
 }

@@ -1,34 +1,34 @@
 package by.tc.task01.entity;
 
-public class TabletPC implements Appliance{
-	int battery_capacity;
-	int display_inches;
-	int memory_rom;
-	int flash_memory_capacity;
+public class TabletPC extends Appliance{
+	int batteryCapacity;
+	int displayInches;
+	int memoryRom;
+	int flashMemoryCapacity;
 	String colour;
-	public int getBattery_capacity() {
-		return battery_capacity;
+	public int getBatteryCapacity() {
+		return batteryCapacity;
 	}
-	public void setBattery_capacity(int battery_capacity) {
-		this.battery_capacity = battery_capacity;
+	public void setBatteryCapacity(int batteryCapacity) {
+		this.batteryCapacity = batteryCapacity;
 	}
-	public int getDisplay_inches() {
-		return display_inches;
+	public int getDisplayInches() {
+		return displayInches;
 	}
-	public void setDisplay_inches(int display_inches) {
-		this.display_inches = display_inches;
+	public void setDisplayInches(int displayInches) {
+		this.displayInches = displayInches;
 	}
-	public int getMemory_rom() {
-		return memory_rom;
+	public int getMemoryRom() {
+		return memoryRom;
 	}
-	public void setMemory_rom(int memory_rom) {
-		this.memory_rom = memory_rom;
+	public void setMemoryRom(int memoryRom) {
+		this.memoryRom = memoryRom;
 	}
-	public int getFlash_memory_capacity() {
-		return flash_memory_capacity;
+	public int getFlashMemoryCapacity() {
+		return flashMemoryCapacity;
 	}
-	public void setFlash_memory_capacity(int flash_memory_capacity) {
-		this.flash_memory_capacity = flash_memory_capacity;
+	public void setFlashMemoryCapacity(int flashMemoryCapacity) {
+		this.flashMemoryCapacity = flashMemoryCapacity;
 	}
 	public String getColour() {
 		return colour;
@@ -37,19 +37,14 @@ public class TabletPC implements Appliance{
 		this.colour = colour;
 	}
 	@Override
-	public String toString() {
-		return "TabletPC [battery_capacity=" + battery_capacity + ", display_inches=" + display_inches + ", memory_rom="
-				+ memory_rom + ", flash_memory_capacity=" + flash_memory_capacity + ", colour=" + colour + "]";
-	}
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + battery_capacity;
+		result = prime * result + batteryCapacity;
 		result = prime * result + ((colour == null) ? 0 : colour.hashCode());
-		result = prime * result + display_inches;
-		result = prime * result + flash_memory_capacity;
-		result = prime * result + memory_rom;
+		result = prime * result + displayInches;
+		result = prime * result + flashMemoryCapacity;
+		result = prime * result + memoryRom;
 		return result;
 	}
 	@Override
@@ -61,20 +56,26 @@ public class TabletPC implements Appliance{
 		if (getClass() != obj.getClass())
 			return false;
 		TabletPC other = (TabletPC) obj;
-		if (battery_capacity != other.battery_capacity)
+		if (batteryCapacity != other.batteryCapacity)
 			return false;
 		if (colour == null) {
 			if (other.colour != null)
 				return false;
 		} else if (!colour.equals(other.colour))
 			return false;
-		if (display_inches != other.display_inches)
+		if (displayInches != other.displayInches)
 			return false;
-		if (flash_memory_capacity != other.flash_memory_capacity)
+		if (flashMemoryCapacity != other.flashMemoryCapacity)
 			return false;
-		if (memory_rom != other.memory_rom)
+		if (memoryRom != other.memoryRom)
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "TabletPC [batteryCapacity=" + batteryCapacity + ", displayInches=" + displayInches + ", memoryRom="
+				+ memoryRom + ", flashMemoryCapacity=" + flashMemoryCapacity + ", colour=" + colour + "]";
+	}
+	
 	
 }

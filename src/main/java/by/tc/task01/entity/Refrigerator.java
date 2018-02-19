@@ -1,17 +1,17 @@
 package by.tc.task01.entity;
 
-public class Refrigerator implements Appliance{
-	int power_consumption;
+public class Refrigerator extends Appliance{
+	int powerConsumption;
 	int weight;
-	int freez_capacity;
-	int overall_capacity;
+	int freezCapacity;
+	int overallCapacity;
 	int height;
 	int width;
-	public int getPower_consumption() {
-		return power_consumption;
+	public int getPowerConsumption() {
+		return powerConsumption;
 	}
-	public void setPower_consumption(int power_consumption) {
-		this.power_consumption = power_consumption;
+	public void setPowerConsumption(int powerConsumption) {
+		this.powerConsumption = powerConsumption;
 	}
 	public int getWeight() {
 		return weight;
@@ -19,17 +19,17 @@ public class Refrigerator implements Appliance{
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
-	public int getFreez_capacity() {
-		return freez_capacity;
+	public int getFreezCapacity() {
+		return freezCapacity;
 	}
-	public void setFreez_capacity(int freez_capacity) {
-		this.freez_capacity = freez_capacity;
+	public void setFreezCapacity(int freezCapacity) {
+		this.freezCapacity = freezCapacity;
 	}
-	public int getOverall_capacity() {
-		return overall_capacity;
+	public int getOverallCapacity() {
+		return overallCapacity;
 	}
-	public void setOverall_capacity(int overall_capacity) {
-		this.overall_capacity = overall_capacity;
+	public void setOverallCapacity(int overallCapacity) {
+		this.overallCapacity = overallCapacity;
 	}
 	public int getHeight() {
 		return height;
@@ -44,10 +44,47 @@ public class Refrigerator implements Appliance{
 		this.width = width;
 	}
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + freezCapacity;
+		result = prime * result + height;
+		result = prime * result + overallCapacity;
+		result = prime * result + powerConsumption;
+		result = prime * result + weight;
+		result = prime * result + width;
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Refrigerator other = (Refrigerator) obj;
+		if (freezCapacity != other.freezCapacity)
+			return false;
+		if (height != other.height)
+			return false;
+		if (overallCapacity != other.overallCapacity)
+			return false;
+		if (powerConsumption != other.powerConsumption)
+			return false;
+		if (weight != other.weight)
+			return false;
+		if (width != other.width)
+			return false;
+		return true;
+	}
+	@Override
 	public String toString() {
-		return "Refrigerator [power_consumption=" + power_consumption + ", weight=" + weight + ", freez_capacity="
-				+ freez_capacity + ", overall_capacity=" + overall_capacity + ", height=" + height + ", width=" + width
+		return "Refrigerator [powerConsumption=" + powerConsumption + ", weight=" + weight + ", freezCapacity="
+				+ freezCapacity + ", overallCapacity=" + overallCapacity + ", height=" + height + ", width=" + width
 				+ "]";
 	}
+	
+	
 	
 }

@@ -1,57 +1,92 @@
 package by.tc.task01.entity;
 
-public class VacuumCleaner implements Appliance{
-	int power_consumption;
-	char filter_type;
-	int bag_type;
-	String wand_type;
-	int motor_speed_regulation;
-	int cleaning_width;
-	public int getPower_consumption() {
-		return power_consumption;
+public class VacuumCleaner extends Appliance{
+	int powerConsumption;
+	char filterType;
+	int bagType;
+	String wandType;
+	int motorSpeedRegulation;
+	int cleaningWidth;
+	public int getPowerConsumption() {
+		return powerConsumption;
 	}
-	public void setPower_consumption(int power_consumption) {
-		this.power_consumption = power_consumption;
+	public void setPowerConsumption(int powerConsumption) {
+		this.powerConsumption = powerConsumption;
 	}
-	public char getFilter_type() {
-		return filter_type;
+	public char getFilterType() {
+		return filterType;
 	}
-	public void setFilter_type(char filter_type) {
-		this.filter_type = filter_type;
+	public void setFilterType(char filterType) {
+		this.filterType = filterType;
 	}
-	public int getBag_type() {
-		return bag_type;
+	public int getBagType() {
+		return bagType;
 	}
-	public void setBag_type(int bag_type) {
-		this.bag_type = bag_type;
+	public void setBagType(int bagType) {
+		this.bagType = bagType;
 	}
-	public String getWand_type() {
-		return wand_type;
+	public String getWandType() {
+		return wandType;
 	}
-	public void setWand_type(String wand_type) {
-		this.wand_type = wand_type;
+	public void setWandType(String wandType) {
+		this.wandType = wandType;
 	}
-	public int getMotor_speed_regulation() {
-		return motor_speed_regulation;
+	public int getMotorSpeedRegulation() {
+		return motorSpeedRegulation;
 	}
-	public void setMotor_speed_regulation(int motor_speed_regulation) {
-		this.motor_speed_regulation = motor_speed_regulation;
+	public void setMotorSpeedRegulation(int motorSpeedRegulation) {
+		this.motorSpeedRegulation = motorSpeedRegulation;
 	}
-	public int getCleaning_width() {
-		return cleaning_width;
+	public int getCleaningWidth() {
+		return cleaningWidth;
 	}
-	public void setCleaning_width(int cleaning_width) {
-		this.cleaning_width = cleaning_width;
+	public void setCleaningWidth(int cleaningWidth) {
+		this.cleaningWidth = cleaningWidth;
 	}
-	public int hashCode () {
-		int result=1;
-		int prime=43;
-		
-		result=result*prime+((wand_type!=null)?0:wand_type.hashCode());
-		result=result*prime+power_consumption;
-		result=result*prime+filter_type;
-		result=result*prime+motor_speed_regulation;
-		
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + bagType;
+		result = prime * result + cleaningWidth;
+		result = prime * result + filterType;
+		result = prime * result + motorSpeedRegulation;
+		result = prime * result + powerConsumption;
+		result = prime * result + ((wandType == null) ? 0 : wandType.hashCode());
 		return result;
 	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		VacuumCleaner other = (VacuumCleaner) obj;
+		if (bagType != other.bagType)
+			return false;
+		if (cleaningWidth != other.cleaningWidth)
+			return false;
+		if (filterType != other.filterType)
+			return false;
+		if (motorSpeedRegulation != other.motorSpeedRegulation)
+			return false;
+		if (powerConsumption != other.powerConsumption)
+			return false;
+		if (wandType == null) {
+			if (other.wandType != null)
+				return false;
+		} else if (!wandType.equals(other.wandType))
+			return false;
+		return true;
+	}
+	@Override
+	public String toString() {
+		return "VacuumCleaner [powerConsumption=" + powerConsumption + ", filterType=" + filterType + ", bagType="
+				+ bagType + ", wandType=" + wandType + ", motorSpeedRegulation=" + motorSpeedRegulation
+				+ ", cleaningWidth=" + cleaningWidth + "]";
+	}
+	
+	
 }

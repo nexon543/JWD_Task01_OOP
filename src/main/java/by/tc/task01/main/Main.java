@@ -1,25 +1,36 @@
 package by.tc.task01.main;
 
-import static by.tc.task01.entity.criteria.SearchCriteria.*;
+
 
 import java.util.List;
 
 import by.tc.task01.dao.ApplianceDAO;
+import by.tc.task01.dao.DAOFactory;
 import by.tc.task01.dao.impl.ApplianceDAOImpl;
 import by.tc.task01.entity.Appliance;
 import by.tc.task01.entity.criteria.Criteria;
+import by.tc.task01.entity.criteria.SearchCriteria;
 import by.tc.task01.service.ApplianceService;
 import by.tc.task01.service.ServiceFactory;
+import by.tc.task01.entity.criteria.SearchCriteria.*;
+import by.tc.task01.entity.Laptop;
 
 public class Main {
 
 	public static void main(String[] args) {
 		List<Appliance> appliances;
 
+		DAOFactory daoFactory=DAOFactory.getInstance();
 		ServiceFactory factory = ServiceFactory.getInstance();
 		ApplianceService service = factory.getApplianceService();
 
 		//////////////////////////////////////////////////////////////////
+		
+		Criteria<SearchCriteria.Laptop> criteriaLaptop = new Criteria<SearchCriteria.Laptop>();
+		criteriaLaptop.setApplianceType("Laptop");
+		criteriaLaptop.add(SearchCriteria.Laptop.BATTERY_CAPACITY, 1);
+		criteriaLaptop.add(SearchCriteria.Laptop.CPU, 1.2);
+		appliances = service.find(criteriaLaptop);
 
 		Criteria<Oven> criteriaOven = new Criteria<Oven>();
 		criteriaOven.setApplianceType("Oven");

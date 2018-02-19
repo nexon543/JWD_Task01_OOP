@@ -1,14 +1,14 @@
 package by.tc.task01.entity;
 
-public class Oven implements Appliance{
+import java.util.Map;
+
+public class Oven extends Appliance{
 	int powerConsumption;
 	int weight;
 	int depth;
 	int capacity;
 	float height;
 	float width;
-	
-	
 	
 	public int getPowerConsumption() {
 		return powerConsumption;
@@ -86,6 +86,7 @@ public class Oven implements Appliance{
 			return false;
 		return true;
 	}
+
 	
 	
 }

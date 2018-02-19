@@ -8,7 +8,7 @@ public class ApplianceRecordParserImpl implements ApplianceRecordParser {
 		Map <String, String> applianceProperties=new HashMap();
 		String [] splited=applianceRecord.split(":");
 		applianceProperties.put("applianceType",	splited[0].trim());
-		splited[1].replaceAll(";", "");
+		splited[1]=splited[1].substring(0,splited[1].length()-1);
 		String[]properties=splited[1].split(",");
 		for (String property:properties) {
 			String splittedProp[]=property.trim().split("=");
