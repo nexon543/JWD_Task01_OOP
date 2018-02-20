@@ -3,7 +3,7 @@ package by.tc.task01.entity.criteria;
 public final class SearchCriteria {
 	
 	public static enum Laptop {
-		BATTERY_CAPACITY, OS, MEMORY_ROM, SYSTEM_MEMORY, CPU, DISPLAY_INCHES
+		BATTERY_CAPACITY, OS, WEIGHT, MEMORY_ROM, SYSTEM_MEMORY, CPU, DISPLAY_INCHES
 	}
 	
 	public static enum Refrigerator{

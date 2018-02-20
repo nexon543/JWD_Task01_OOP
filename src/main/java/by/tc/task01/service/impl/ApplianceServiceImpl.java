@@ -1,6 +1,6 @@
 package by.tc.task01.service.impl;
 
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +22,8 @@ public class ApplianceServiceImpl implements ApplianceService{
 		ApplianceDAO applianceDAO = factory.getApplianceDAO();
 		try {
 			appliances = applianceDAO.find(criteria);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
+			// Logger, DAO FileReading/Parsing Exception
 			e.printStackTrace();
 		}
 		
