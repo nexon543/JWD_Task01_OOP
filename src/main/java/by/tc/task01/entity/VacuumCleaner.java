@@ -1,12 +1,15 @@
 package by.tc.task01.entity;
 
 public class VacuumCleaner extends Appliance{
+	
 	int powerConsumption;
 	char filterType;
 	int bagType;
 	String wandType;
 	int motorSpeedRegulation;
 	int cleaningWidth;
+	
+	
 	public int getPowerConsumption() {
 		return powerConsumption;
 	}

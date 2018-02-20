@@ -22,8 +22,14 @@ public class Main {
 		
 		Criteria<SearchCriteria.Laptop> criteriaLaptop = new Criteria<SearchCriteria.Laptop>();
 		criteriaLaptop.setApplianceType("Laptop");
-		criteriaLaptop.add(SearchCriteria.Laptop.BATTERY_CAPACITY, 1);
-		criteriaLaptop.add(SearchCriteria.Laptop.CPU, 1.2);
+		criteriaLaptop.add(SearchCriteria.Laptop.BATTERY_CAPACITY, new Float(2), Criteria.MORE);
+		criteriaLaptop.add(SearchCriteria.Laptop.CPU, 1.2f, Criteria.MORE);
+		appliances = service.find(criteriaLaptop);
+
+		PrintApplianceInfo.printAll(appliances);
+		System.out.println("-------------------------------");
+		criteriaLaptop.add(SearchCriteria.Laptop.BATTERY_CAPACITY, new Float(2), Criteria.LESS);
+		criteriaLaptop.add(SearchCriteria.Laptop.CPU, 1.5f, Criteria.MORE);
 		appliances = service.find(criteriaLaptop);
 
 		PrintApplianceInfo.printAll(appliances);
