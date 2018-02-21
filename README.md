@@ -1,2 +1,2 @@
 # JWD_Task01_OOP
-В файле "appliances_db.txt" хранятся данные об электротоварах. Необходимо написать приложение, которое найдеёт в данном файле группу товаров, удовлетворяющую заданным критериям поиска. Критерии поиска могут быть пользовальными и задаются пользователем. Пример программы запускается в методе main с "харкодом" без ввода с калвиатуры. Файл "appliances_db.txt" находится в корне проекта.
+File "appliances_db.txt" stores data about different appliances. Make appliacation to find groups of goods according to different criterias. Criterias can be different and are setted by user. Lunch example of program in main method without console input/output.
