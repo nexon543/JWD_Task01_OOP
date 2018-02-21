@@ -40,7 +40,7 @@ public abstract class Appliance {
 		}
 	}
 	
-	protected void setString (String propertyName, String value) {};
+	protected void setString (String propertyName, String value) {};// эм, а что методы-то делают?
 	protected void setInt(String propertyName, int value) {}
 	protected void setFloat(String propertyName, float value) {}
 	protected void setDouble(String propertyName, double value) {}
