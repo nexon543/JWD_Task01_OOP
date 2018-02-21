@@ -9,7 +9,7 @@ import java.io.OutputStream;
 import java.nio.file.Paths;
 import java.util.Properties;
 
-public class PropertyManagerImpl implements PropertyManager, AutoCloseable {
+public class PropertyManagerImpl implements PropertyManager, AutoCloseable {// оставлю этот класс без комментариев
 	private String propertiesFilePath="config.properties";
 	InputStream input;
 	private Properties appProperties = new Properties();
