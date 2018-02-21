@@ -41,8 +41,17 @@ public class ApplianceDAOImpl implements ApplianceDAO, AutoCloseable{//  AutoClo
 		while ((applianceRecord=sourceApplianceReader.read())!=null){
 			if(!applianceRecord.trim().equals("")){
 				Map <String, String> applianceProperties=applianceRecordParser.parse(applianceRecord);
-				Appliance appliance=applianceFactory.getAppliance(applianceProperties);
-				boolean isValid=criteria.checkApplianceCriteria(applianceProperties);
+				Appliance appliance=applianceFactory.getAppliance(applianceProperties);// сначала создаем объект
+				boolean isValid=criteria.checkApplianceCriteria(applianceProperties);// а потом проверяем корректность данных при его создании?
+				
+				// тебе нужно найти в файле подходящие строки с нужной инфой и на основе этой инфы создать соответствующий объект
+				// замени файл на БД смысл остается тот же
+				
+				// ты же сначала создаешь недообъект, у когорого заполнен map, унаследованный из базового класса (которого там и не должно быть)
+				// а потом только сравниваешь параметры
+				
+				// ну перенеси свою логику на источник - базу данных, тоже будет выбипать каждую запись, из нее создавать объект, а потом определять - этазапись нам нужна или нет?
+				
 				if (isValid){
 					appliances.add(appliance);
 				}
@@ -51,7 +60,7 @@ public class ApplianceDAOImpl implements ApplianceDAO, AutoCloseable{//  AutoClo
 		return appliances;
 	}
 
-	public void close() throws Exception {
+	public void close() throws Exception {// throws Exception - просто Exception?
 		sourceApplianceReader.close();
 	}
 }
