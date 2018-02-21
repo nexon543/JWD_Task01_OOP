@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ApplianceRecordParserImpl implements ApplianceRecordParser {
-	public Map <String, String> parse (String applianceRecord){
+	public Map <String, String> parse (String applianceRecord){// надо было поработать над именами переменных, а иначе без полного погружения в предметную область и не поймешь, что ты тут делаешь
 		Map <String, String> applianceProperties=new HashMap();
 		String [] splited=applianceRecord.split(":");
 		applianceProperties.put("applianceType",	splited[0].trim());
