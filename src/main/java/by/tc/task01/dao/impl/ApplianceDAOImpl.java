@@ -22,11 +22,12 @@ import by.tc.task01.util.PropertyManagerImpl;
 import by.tc.task01.util.appliance_parser.ApplianceRecordParser;
 import by.tc.task01.util.appliance_parser.ApplianceRecordParserImpl;
 
-public class ApplianceDAOImpl implements ApplianceDAO, AutoCloseable{
+public class ApplianceDAOImpl implements ApplianceDAO, AutoCloseable{//  AutoCloseable - ЭЭЭЭЭЭЭЭЭЭЭ, что это, на реализации дао надо close вызывать? ЗАЧЕМ?
 
-	ApplianceFactory applianceFactory;
-	ApplianceRecordParser applianceRecordParser;
-	SourceApplianceReader sourceApplianceReader;
+	ApplianceFactory applianceFactory;// атрибуты достапа, Карл, где атрибуты?
+	ApplianceRecordParser applianceRecordParser;// плюс мы разбирали, почему в реализации дао, как и в реализации сервисов не должно быть полей экземпляра класса
+	// на нескольких ревью разбирали - ты свои парсер предполагаешь делить между несколькими потоками, т.к. объект ApplianceDAOImpl у тебя будет в единственном экземпляре?
+	SourceApplianceReader sourceApplianceReader;//ааа, вот зачем надо close вызывать, только такой код мутить для чтения properties - тебя самомго в это ничего не смущало
 
 	public ApplianceDAOImpl() throws IOException {
 		sourceApplianceReader=new SourceApplianceReader();
@@ -56,7 +57,10 @@ public class ApplianceDAOImpl implements ApplianceDAO, AutoCloseable{
 }
 
 
+// почему эти классы не в своих файлах?
 
+// на... такой огород городить, чтобы просто прочитать properties-файл
+// да и по твоей логике, я должен его читать в каждом классе, где мне нужна инфа из пропертей - где логика?
 class SourceNameReader {
 	public String read () throws IOException   {
 		String applianceDBPath=null;
