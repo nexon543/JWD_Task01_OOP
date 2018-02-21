@@ -10,15 +10,18 @@ public class Validator {
 
 		String applianceTypeName=criteria.getApplianceType();
 		boolean isValidAppliance=checkApplianceTypeName(applianceTypeName.toUpperCase());
+		// check Appliance Type Name - если читать имя метод правильно - именатор проверящего электротоварного типа
+		// если вкладывая твою логику - проверить ТИП ИМЕНИ(названия) электротовара - зачем мне проверять тип того, как называется товар?
 		if (!isValidAppliance)
-			return false;
+			return false;// { } где, или Code Convention - это не твое?
 		return true;
 	}
 
 	private static boolean checkApplianceTypeName(String applianceType) {
 		try
 		{
-			ApplianceTypes aType=SearchCriteria.ApplianceTypes.valueOf(applianceType);
+			ApplianceTypes aType=SearchCriteria.ApplianceTypes.valueOf(applianceType);// логику валидации перенес в сущность - зачем?
+			// а если правила валидации параметров изменятся?
 			return true;
 		}
 		catch (IllegalArgumentException ex) {

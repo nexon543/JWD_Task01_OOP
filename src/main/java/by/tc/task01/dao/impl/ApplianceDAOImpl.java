@@ -22,11 +22,12 @@ import by.tc.task01.util.PropertyManagerImpl;
 import by.tc.task01.util.appliance_parser.ApplianceRecordParser;
 import by.tc.task01.util.appliance_parser.ApplianceRecordParserImpl;
 
-public class ApplianceDAOImpl implements ApplianceDAO, AutoCloseable{
+public class ApplianceDAOImpl implements ApplianceDAO, AutoCloseable{//  AutoCloseable - ЭЭЭЭЭЭЭЭЭЭЭ, что это, на реализации дао надо close вызывать? ЗАЧЕМ?
 
-	ApplianceFactory applianceFactory;
-	ApplianceRecordParser applianceRecordParser;
-	SourceApplianceReader sourceApplianceReader;
+	ApplianceFactory applianceFactory;// атрибуты достапа, Карл, где атрибуты?
+	ApplianceRecordParser applianceRecordParser;// плюс мы разбирали, почему в реализации дао, как и в реализации сервисов не должно быть полей экземпляра класса
+	// на нескольких ревью разбирали - ты свои парсер предполагаешь делить между несколькими потоками, т.к. объект ApplianceDAOImpl у тебя будет в единственном экземпляре?
+	SourceApplianceReader sourceApplianceReader;//ааа, вот зачем надо close вызывать, только такой код мутить для чтения properties - тебя самомго в это ничего не смущало
 
 	public ApplianceDAOImpl() throws IOException {
 		sourceApplianceReader=new SourceApplianceReader();
@@ -40,8 +41,17 @@ public class ApplianceDAOImpl implements ApplianceDAO, AutoCloseable{
 		while ((applianceRecord=sourceApplianceReader.read())!=null){
 			if(!applianceRecord.trim().equals("")){
 				Map <String, String> applianceProperties=applianceRecordParser.parse(applianceRecord);
-				Appliance appliance=applianceFactory.getAppliance(applianceProperties);
-				boolean isValid=criteria.checkApplianceCriteria(applianceProperties);
+				Appliance appliance=applianceFactory.getAppliance(applianceProperties);// сначала создаем объект
+				boolean isValid=criteria.checkApplianceCriteria(applianceProperties);// а потом проверяем корректность данных при его создании?
+				
+				// тебе нужно найти в файле подходящие строки с нужной инфой и на основе этой инфы создать соответствующий объект
+				// замени файл на БД смысл остается тот же
+				
+				// ты же сначала создаешь недообъект, у когорого заполнен map, унаследованный из базового класса (которого там и не должно быть)
+				// а потом только сравниваешь параметры
+				
+				// ну перенеси свою логику на источник - базу данных, тоже будет выбипать каждую запись, из нее создавать объект, а потом определять - этазапись нам нужна или нет?
+				
 				if (isValid){
 					appliances.add(appliance);
 				}
@@ -50,13 +60,16 @@ public class ApplianceDAOImpl implements ApplianceDAO, AutoCloseable{
 		return appliances;
 	}
 
-	public void close() throws Exception {
+	public void close() throws Exception {// throws Exception - просто Exception?
 		sourceApplianceReader.close();
 	}
 }
 
 
+// почему эти классы не в своих файлах?
 
+// на... такой огород городить, чтобы просто прочитать properties-файл
+// да и по твоей логике, я должен его читать в каждом классе, где мне нужна инфа из пропертей - где логика?
 class SourceNameReader {
 	public String read () throws IOException   {
 		String applianceDBPath=null;

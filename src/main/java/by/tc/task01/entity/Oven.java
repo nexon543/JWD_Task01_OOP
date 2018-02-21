@@ -3,12 +3,14 @@ package by.tc.task01.entity;
 import java.util.Map;
 
 public class Oven extends Appliance{
-	int powerConsumption;
+	int powerConsumption;// атрибуты доступа Пушкин съел?
 	int weight;
 	int depth;
 	int capacity;
 	float height;
 	float width;
+	
+	// конструктор явно прописывай, не оставляй ничего на умолчание - не тесты пишешь
 	
 	public int getPowerConsumption() {
 		return powerConsumption;
@@ -69,7 +71,7 @@ public class Oven extends Appliance{
 			return true;
 		if (obj == null)
 			return false;
-		if (!(obj instanceof Oven))
+		if (!(obj instanceof Oven))// obj instanceof Oven - instanceof в equals дважды обсуждался на тренинге, и его некорректность тут также
 			return false;
 		Oven other = (Oven) obj;
 		if (capacity != other.capacity)

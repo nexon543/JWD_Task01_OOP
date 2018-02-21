@@ -53,6 +53,11 @@ public class Criteria<E> {
 		return result;
 	}
 	
+	// зачем эти методы разместил в этом классе?
+	// класс же сразу стал тяжелым, и даже просматривать его не очень приятно
+	
+	// плюс идея проверять, подходит ли тебе инфа, прочитанна из файла для создания объекта, создав уже объект, а потом проверяя параметры - слишком тяжелая
+	// Java обладает прекрасными методами поика инфа сразу в строке
 	public boolean checkApplianceCriteria(Map<String, String> properties) {
 		if (!properties.get("applianceType").equals(applianceType))
 			return false;

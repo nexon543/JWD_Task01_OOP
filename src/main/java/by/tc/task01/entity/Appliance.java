@@ -6,7 +6,10 @@ import java.util.Set;
 
 public abstract class Appliance {
 	
-	protected static Map <String, String> propertyFieldType;
+	protected static Map <String, String> propertyFieldType;// что это????
+	// Appliance - базовая класс-сущность для иерархии электротоваров, откуда в ней может взяться этот map?
+	// и что за фигню делает метод ниже? во-первых - код этого метод - это помесь логики с валидацией данных
+	// во-вторых - почему определяются только четыре типа?
 	
 	public void initFieldsByProperties(Map<String, String> s) {
 		Set<Entry<String, String>> entrySet=s.entrySet();
@@ -37,7 +40,7 @@ public abstract class Appliance {
 		}
 	}
 	
-	protected void setString (String propertyName, String value) {};
+	protected void setString (String propertyName, String value) {};// эм, а что методы-то делают?
 	protected void setInt(String propertyName, int value) {}
 	protected void setFloat(String propertyName, float value) {}
 	protected void setDouble(String propertyName, double value) {}

@@ -15,16 +15,17 @@ public class ApplianceFactory {
 	private ApplianceFactory() {}
 	
 	public Appliance getAppliance(Map<String, String> properties) {
-		ApplianceType applianceType=ApplianceType.getApplianceType(properties.get("applianceType"));
+		ApplianceType applianceType=ApplianceType.getApplianceType(properties.get("applianceType"));// уже надоело и писать и говорить о том, что мы делаем с константами, в том числе и константными строками, в коде
+		
 		Appliance appliance=null;
-		switch (applianceType) {
+		switch (applianceType) {// а если различных электротоваров будет 200? что делать будем?
 		case LAPTOP: 
 			appliance=new Laptop();
 			appliance.initFieldsByProperties(properties);
 			break;
 		case OVEN: 
 			appliance=new Oven();
-			appliance.initFieldsByProperties(properties);
+			appliance.initFieldsByProperties(properties);// сущности могуть быть инициализированы 100500 способами, не надо логику их инициализации в сами сущности засовывать, они не выдержат
 			break;
 		case REFREGERATOR:
 			appliance=new Refrigerator();
