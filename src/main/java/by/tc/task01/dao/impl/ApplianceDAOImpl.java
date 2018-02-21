@@ -1,93 +1,53 @@
 package by.tc.task01.dao.impl;
 
-import java.io.BufferedReader;
-import java.io.Closeable;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import by.tc.task01.dao.ApplianceDAO;
 import by.tc.task01.entity.Appliance;
+import by.tc.task01.entity.criteria.ApplianceType;
 import by.tc.task01.entity.criteria.Criteria;
-import by.tc.task01.entity.factory.ApplianceFactory;
-import by.tc.task01.util.PropertyManager;
-import by.tc.task01.util.PropertyManagerImpl;
+import by.tc.task01.entity.factory.ApplianceFactoryClient;
+import by.tc.task01.entity.factory.LaptopFactory;
 import by.tc.task01.util.appliance_parser.ApplianceRecordParser;
 import by.tc.task01.util.appliance_parser.ApplianceRecordParserImpl;
+import by.tc.task01.util.source_reader.SourceApplianceReader;
 
-public class ApplianceDAOImpl implements ApplianceDAO, AutoCloseable{
+public class ApplianceDAOImpl implements ApplianceDAO{
 
-	ApplianceFactory applianceFactory;
 	ApplianceRecordParser applianceRecordParser;
 	SourceApplianceReader sourceApplianceReader;
-
+	ApplianceFactoryClient applianceFactoryClient;
+	
+	
 	public ApplianceDAOImpl() throws IOException {
-		sourceApplianceReader=new SourceApplianceReader();
+		
 		applianceRecordParser=new ApplianceRecordParserImpl();
-		applianceFactory=ApplianceFactory.getInstance();
+		applianceFactoryClient=new ApplianceFactoryClient();
+		applianceFactoryClient.addFactroy(ApplianceType.LAPTOP, new LaptopFactory());
 	}
 	
+
 	public <E> List<Appliance> find(Criteria<E> criteria) throws IOException {
-		List<Appliance> appliances=new ArrayList<Appliance>();
+		sourceApplianceReader=new SourceApplianceReader();
+		List<Appliance> applianceList=new ArrayList<Appliance>();
 		String applianceRecord;
 		while ((applianceRecord=sourceApplianceReader.read())!=null){
 			if(!applianceRecord.trim().equals("")){
 				Map <String, String> applianceProperties=applianceRecordParser.parse(applianceRecord);
-				Appliance appliance=applianceFactory.getAppliance(applianceProperties);
+				
 				boolean isValid=criteria.checkApplianceCriteria(applianceProperties);
 				if (isValid){
-					appliances.add(appliance);
+					Appliance appliance=applianceFactoryClient.getAppliance(applianceProperties);
+					applianceList.add(appliance);
 				}
 			}
 		}
-		return appliances;
-	}
-
-	public void close() throws Exception {
 		sourceApplianceReader.close();
-	}
-}
-
-
-
-class SourceNameReader {
-	public String read () throws IOException   {
-		String applianceDBPath=null;
-		PropertyManager pm=new PropertyManagerImpl();
-		pm.setPropertiesSourceFile("config.properties");
-		applianceDBPath=pm.getProperty("applianceDBFile");
-		System.out.println(applianceDBPath);
-		return applianceDBPath;
-	}
-}
-
-class SourceApplianceReader implements Closeable {
-	private String sourceName;
-	private BufferedReader fileReader;
-	
-	public SourceApplianceReader()  throws IOException {
-		SourceNameReader snr=new SourceNameReader();
-		sourceName=snr.read();
-		FileReader fr = new FileReader(sourceName);
-		fileReader=new BufferedReader (fr);
-	}
-	public String read() throws IOException {
-		if (fileReader == null) {
-			throw new FileNotFoundException();
-		}
-		return fileReader.readLine();
+		return applianceList;
 	}
 	
-	
-	public void close() throws IOException {
-		fileReader.close();
-		
-	}
 }

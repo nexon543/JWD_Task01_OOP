@@ -16,11 +16,11 @@ public final class DAOFactory {
 			throw new ExceptionInInitializerError(ex);
 		}
 	}
-	private final ApplianceDAO applianceDAO;
+	private ApplianceDAO applianceDAO;
 	
 	private DAOFactory() throws IOException {
 		applianceDAO = new ApplianceDAOImpl();
-		}
+	}
 
 	public ApplianceDAO getApplianceDAO() {
 		return applianceDAO;
