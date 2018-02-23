@@ -6,6 +6,7 @@ public class TabletPC extends Appliance{
 	int memoryRom;
 	int flashMemoryCapacity;
 	String colour;
+	
 	public int getBatteryCapacity() {
 		return batteryCapacity;
 	}
