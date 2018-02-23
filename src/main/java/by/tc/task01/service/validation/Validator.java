@@ -18,12 +18,16 @@ public class Validator {
 	private static boolean checkApplianceTypeName(String applianceType) {
 		try
 		{
-			ApplianceTypes aType=SearchCriteria.ApplianceTypes.valueOf(applianceType);
+			SearchCriteria.ApplianceTypes.valueOf(applianceType);
 			return true;
 		}
 		catch (IllegalArgumentException ex) {
 			return false;
 		}
+	}
+
+	private static <E> boolean validateDataType(Criteria<E> criteria){
+
 	}
 
 }

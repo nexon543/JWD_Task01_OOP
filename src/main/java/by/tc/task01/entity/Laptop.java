@@ -8,49 +8,22 @@ public class Laptop extends Appliance{
 	int weight;
 	String os;
 	int memoryRom;
+	int systemMemory;
 	float cpu;
 	int displayInches;
 	
-	static {
-		propertyFieldType=new HashMap<String, String>();
-		propertyFieldType.put("BATTERY_CAPACITY", "float");
-		propertyFieldType.put("WEIGHT", "int");
-		propertyFieldType.put("OS", "String");
-		propertyFieldType.put("MEMORY_ROM", "int");
-		propertyFieldType.put("DISPLAY_INCHES", "int");
-		propertyFieldType.put("CPU", "float");
-		
-	}
 	
-	public static Appliance create() {
-		//Laptop.propertyFieldType
-		return new Laptop();
+	public int getSystemMemory() {
+		return systemMemory;
 	}
-	protected void setInt (String fieldName, int value) {
-		switch(fieldName) {
-		
-		case "WEIGHT":this.weight=value;
-		break;
-		case "MEMORY_ROM":this.memoryRom=value;
-		break;
-		case "DISPLAY_INCHES":this.displayInches=value;
-		}
+
+	public void setSystemMemory(int systemMemory) {
+		this.systemMemory = systemMemory;
 	}
-	protected void setFloat (String fieldName, float value) {
-		switch(fieldName) {
-			case "BATTERY_CAPACITY":this.batteryCapacity=value;
-			break;
-			case "CPU": this.cpu=value;
-		}
-	}
-	protected void setString (String fieldValue, String value) {
-		 this.os=value;
-	}
-	
+
 	public float getBatteryCapacity() {
 		return batteryCapacity;
 	}
-
 
 	public void setBatteryCapacity(float batteryCapacity) {
 		this.batteryCapacity = batteryCapacity;
