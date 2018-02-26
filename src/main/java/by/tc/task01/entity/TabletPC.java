@@ -1,12 +1,13 @@
 package by.tc.task01.entity;
 
 public class TabletPC extends Appliance{
-	int batteryCapacity;
-	int displayInches;
-	int memoryRom;
-	int flashMemoryCapacity;
-	String colour;
-	
+	private int batteryCapacity;
+	private int displayInches;
+	private int memoryRom;
+	private int flashMemoryCapacity;
+	private String colour;
+
+	public TabletPC(){}
 	public int getBatteryCapacity() {
 		return batteryCapacity;
 	}

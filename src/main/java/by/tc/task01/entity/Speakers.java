@@ -1,10 +1,12 @@
 package by.tc.task01.entity;
 
 public class Speakers extends Appliance{
-	int powerConsumption;
-	int numberOfSpeakers;
-	int cordLength;
-	float freaquencyRange;
+	private int powerConsumption;
+	private int numberOfSpeakers;
+	private int cordLength;
+	private float freaquencyRange;
+
+	public Speakers(){}
 	public int getPowerConsumption() {
 		return powerConsumption;
 	}

@@ -19,9 +19,7 @@ import by.tc.task01.util.source_reader.SourceApplianceReader;
 public class ApplianceDAOImpl implements ApplianceDAO{
 
 	ApplianceRecordParser applianceRecordParser;
-	SourceApplianceReader sourceApplianceReader;
 	ApplianceFactoryClient applianceFactoryClient;
-	
 	
 	public ApplianceDAOImpl() throws IOException {
 		
@@ -46,7 +44,6 @@ public class ApplianceDAOImpl implements ApplianceDAO{
 				}
 			}
 		}
-		sourceApplianceReader.close();
 		return applianceList;
 	}
 	

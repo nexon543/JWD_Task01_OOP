@@ -4,15 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Laptop extends Appliance{
-	float batteryCapacity;
-	int weight;
-	String os;
-	int memoryRom;
-	int systemMemory;
-	float cpu;
-	int displayInches;
+	private float batteryCapacity;
+	private int weight;
+	private String os;
+	private int memoryRom;
+	private int systemMemory;
+	private float cpu;
+	private int displayInches;
 	
-	
+	public Laptop(){}
+
 	public int getSystemMemory() {
 		return systemMemory;
 	}

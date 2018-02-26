@@ -1,12 +1,14 @@
 package by.tc.task01.entity;
 
 public class Refrigerator extends Appliance{
-	int powerConsumption;
-	int weight;
-	int freezCapacity;
-	int overallCapacity;
-	int height;
-	int width;
+	private int powerConsumption;
+	private int weight;
+	private int freezCapacity;
+	private int overallCapacity;
+	private int height;
+	private int width;
+
+	public Refrigerator(){}
 	public int getPowerConsumption() {
 		return powerConsumption;
 	}

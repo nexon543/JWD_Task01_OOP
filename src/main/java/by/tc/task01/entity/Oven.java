@@ -3,13 +3,14 @@ package by.tc.task01.entity;
 import java.util.Map;
 
 public class Oven extends Appliance{
-	int powerConsumption;
-	int weight;
-	int depth;
-	int capacity;
-	float height;
-	float width;
-	
+	private int powerConsumption;
+	private int weight;
+	private int depth;
+	private int capacity;
+	private float height;
+	private float width;
+
+	public Oven(){}
 	public int getPowerConsumption() {
 		return powerConsumption;
 	}
@@ -63,30 +64,20 @@ public class Oven extends Appliance{
 		result = prime * result + Float.floatToIntBits(width);
 		return result;
 	}
+
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof Oven))
-			return false;
-		Oven other = (Oven) obj;
-		if (capacity != other.capacity)
-			return false;
-		if (depth != other.depth)
-			return false;
-		if (Float.floatToIntBits(height) != Float.floatToIntBits(other.height))
-			return false;
-		if (powerConsumption != other.powerConsumption)
-			return false;
-		if (weight != other.weight)
-			return false;
-		if (Float.floatToIntBits(width) != Float.floatToIntBits(other.width))
-			return false;
-		return true;
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Oven oven = (Oven) o;
+		return powerConsumption == oven.powerConsumption &&
+				weight == oven.weight &&
+				depth == oven.depth &&
+				capacity == oven.capacity &&
+				Float.compare(oven.height, height) == 0 &&
+				Float.compare(oven.width, width) == 0;
 	}
 
-	
-	
+
+
 }

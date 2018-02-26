@@ -20,13 +20,7 @@ public class ApplianceServiceImpl implements ApplianceService{
 		List<Appliance> appliances=new ArrayList<Appliance>();
 		DAOFactory factory = DAOFactory.getInstance();
 		ApplianceDAO applianceDAO = factory.getApplianceDAO();
-		try {
 			appliances = applianceDAO.find(criteria);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		return appliances;
 	}
 
