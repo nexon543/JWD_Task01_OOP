@@ -1,38 +1,18 @@
 package by.tc.task01.util.source_reader;
 
-import java.io.IOException;
-
-import by.tc.task01.util.PropertyManager;
-import by.tc.task01.util.PropertyManagerImpl;
+import java.util.ResourceBundle;
 
 public class SourceNameReader {
-  private String configFilePath;
-  private String sourceNameProperty;
 
-  public SourceNameReader(String configFilePath, String sourceNameProperty){
-    this.configFilePath=configFilePath;
-    this.sourceNameProperty=sourceNameProperty;
-  }
+    private ResourceBundle properties;
 
-  public String read () throws IOException {
-    PropertyManager propertyManager=new PropertyManagerImpl();
-    propertyManager.setPropertiesSourceFile(configFilePath);
-    String applianceFilePath=propertyManager.getProperty(sourceNameProperty);
-    return applianceFilePath;
-  }
+    public SourceNameReader() {
+    }
 
-  public String getConfigFilePath() {
-    return configFilePath;
-  }
-  public void setConfigFilePath(String configFilePath) {
-    this.configFilePath = configFilePath;
-  }
-  public String getSourceNameProperty() {
-    return sourceNameProperty;
-  }
-  public void setSourceNamePropertyKey(String sourceNameProperty) {
-    this.sourceNameProperty = sourceNameProperty;
-  }
-
+    public String readApplianceFilePath() {
+        properties = ResourceBundle.getBundle(DBParameter.CONFIG_FILE_PATH);
+        String applianceFilePath = properties.getString(DBParameter.APPLIANCE_FILE_PATH_KEY);
+        return applianceFilePath;
+    }
 
 }

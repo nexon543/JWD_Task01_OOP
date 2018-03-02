@@ -1,32 +1,39 @@
 package by.tc.task01.main;
 
 
-
-import java.util.List;
-
 import by.tc.task01.entity.Appliance;
+import by.tc.task01.entity.criteria.ApplianceType;
 import by.tc.task01.entity.criteria.Criteria;
 import by.tc.task01.entity.criteria.SearchCriteria;
 import by.tc.task01.service.ApplianceService;
 import by.tc.task01.service.ServiceFactory;
+import by.tc.task01.service.exception.ServiceException;
+import by.tc.task01.service.validation.Validator;
+
+import java.util.List;
 
 public class Main {
 
-	public static void main(String[] args) {
-		List<Appliance> appliances;
+    public static void main(String[] args) {
 
-		ServiceFactory factory = ServiceFactory.getInstance();
-		ApplianceService service = factory.getApplianceService();
+        ServiceFactory factory = ServiceFactory.getInstance();
+        ApplianceService service;
+        service = factory.getApplianceService();
 
-		//////////////////////////////////////////////////////////////////
-		
-		Criteria<SearchCriteria.Laptop> criteriaLaptop = new Criteria<SearchCriteria.Laptop>();
-		criteriaLaptop.setApplianceType("Laptop");
-		criteriaLaptop.add(SearchCriteria.Laptop.BATTERY_CAPACITY, 1);
-		criteriaLaptop.add(SearchCriteria.Laptop.CPU, 1.2);
-		appliances = service.find(criteriaLaptop);
+        List<Appliance> appliances;
 
-		PrintApplianceInfo.printAll(appliances);
+        //////////////////////////////////////////////////////////////////
+
+        Criteria<SearchCriteria.Laptop> criteriaLaptop = new Criteria<>();
+        criteriaLaptop.setApplianceType(ApplianceType.LAPTOP);
+        criteriaLaptop.add(SearchCriteria.Laptop.BATTERY_CAPACITY, 1);
+        criteriaLaptop.add(SearchCriteria.Laptop.CPU, 1.2);
+        Validator.criteriaValidator(criteriaLaptop);
+        try {
+            appliances = service.find(criteriaLaptop);
+            PrintApplianceInfo.printAll(appliances);
+        } catch (ServiceException ex) {
+        }
 		
 		/*Criteria<Oven> criteriaOven = new Criteria<Oven>();
 		criteriaOven.setApplianceType("Oven");
@@ -62,6 +69,6 @@ public class Main {
 			PrintApplianceInfo.print(appliance);
 		}
 */
-	}
+    }
 
 }
