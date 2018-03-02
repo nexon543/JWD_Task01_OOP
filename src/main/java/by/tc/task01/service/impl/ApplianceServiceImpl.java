@@ -1,33 +1,44 @@
 package by.tc.task01.service.impl;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import by.tc.task01.dao.ApplianceDAO;
 import by.tc.task01.dao.DAOFactory;
+import by.tc.task01.dao.exception.DAOException;
 import by.tc.task01.entity.Appliance;
 import by.tc.task01.entity.criteria.Criteria;
 import by.tc.task01.service.ApplianceService;
+import by.tc.task01.service.exception.ServiceException;
 import by.tc.task01.service.validation.Validator;
 
-public class ApplianceServiceImpl implements ApplianceService{
+import java.util.ArrayList;
+import java.util.List;
 
-	public <E> List<Appliance> find(Criteria<E> criteria) {
-		if (!Validator.criteriaValidator(criteria)) {
-			return null;
-		}
-		List<Appliance> appliances=new ArrayList<Appliance>();
-		DAOFactory factory = DAOFactory.getInstance();
-		ApplianceDAO applianceDAO = factory.getApplianceDAO();
-		try {
-			appliances = applianceDAO.find(criteria);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return appliances;
-	}
+public class ApplianceServiceImpl implements ApplianceService {
+
+    String applianceFilePath;
+    public <E> List<Appliance> find(Criteria<E> criteria) throws ServiceException {
+        if (!Validator.criteriaValidator(criteria)) {
+            return null;
+        }
+        List<Appliance> appliances = new ArrayList<Appliance>();
+        DAOFactory factory = DAOFactory.getInstance();
+        ApplianceDAO  applianceDAO;
+        applianceDAO = factory.getApplianceDAO();
+        try {
+            appliances = applianceDAO.find(criteria);
+        } catch (DAOException ex) {
+            if (ex.getErrorCode() == DAOException.RECORD_ERROR) {
+                throw new ServiceException(ServiceException.CRITERIA_TYPE_ERROR);
+            }
+            if (ex.getErrorCode() == DAOException.SOURCE_ERROR) {
+                throw new ServiceException(ServiceException.FILE_NAME_ERROR);
+            }
+        }
+        return appliances;
+    }
+
+    @Override
+    public void applianceFilePath(String applianceFilePath) {
+        this.applianceFilePath=applianceFilePath;
+    }
 
 }
