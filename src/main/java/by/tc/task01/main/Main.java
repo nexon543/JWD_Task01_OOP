@@ -33,6 +33,7 @@ public class Main {
             appliances = service.find(criteriaLaptop);
             PrintApplianceInfo.printAll(appliances);
         } catch (ServiceException ex) {
+            System.out.println(ex.getMessage());
         }
 		
 		/*Criteria<Oven> criteriaOven = new Criteria<Oven>();

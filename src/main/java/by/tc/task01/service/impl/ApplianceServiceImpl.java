@@ -14,12 +14,11 @@ import java.util.List;
 
 public class ApplianceServiceImpl implements ApplianceService {
 
-    String applianceFilePath;
     public <E> List<Appliance> find(Criteria<E> criteria) throws ServiceException {
         if (!Validator.criteriaValidator(criteria)) {
             return null;
         }
-        List<Appliance> appliances = new ArrayList<Appliance>();
+        List<Appliance> appliances = new ArrayList<>();
         DAOFactory factory = DAOFactory.getInstance();
         ApplianceDAO  applianceDAO;
         applianceDAO = factory.getApplianceDAO();
@@ -34,11 +33,6 @@ public class ApplianceServiceImpl implements ApplianceService {
             }
         }
         return appliances;
-    }
-
-    @Override
-    public void applianceFilePath(String applianceFilePath) {
-        this.applianceFilePath=applianceFilePath;
     }
 
 }

@@ -1,6 +1,7 @@
 package by.tc.task01.service.appliance_factory;
 
 import by.tc.task01.entity.Appliance;
+import by.tc.task01.service.validation.Validator;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -8,8 +9,7 @@ import java.util.Map.Entry;
 
 public abstract class AbstractApplianceFactory {
 
-    Map<String, String> propertyFieldType;
-    Appliance applianceInstance;
+    protected Appliance applianceInstance;
 
     public void initFieldsByProperties(Map<String, String> applianceProperties) {
 
@@ -17,7 +17,9 @@ public abstract class AbstractApplianceFactory {
 
         while (propertyEntries.hasNext()) {
             Entry<String, String> property = propertyEntries.next();
-            setApplianceField(property.getKey(), property.getValue());
+            if (!Validator.isUnpairedPropertyName(property.getKey())) {
+                setApplianceField(property.getKey(), property.getValue());
+            }
         }
     }
 
@@ -31,5 +33,5 @@ public abstract class AbstractApplianceFactory {
 
     public abstract Appliance getAppliance(Map<String, String> properties);
 
-    public abstract void setApplianceField(String propertyName, String propertyValue);
+    protected abstract void setApplianceField(String propertyName, String propertyValue);
 }

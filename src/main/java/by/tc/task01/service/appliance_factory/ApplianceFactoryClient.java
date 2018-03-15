@@ -14,7 +14,7 @@ public class ApplianceFactoryClient {
 
     public Appliance getAppliance(Map<String, String> applianceProperties) {
         Appliance appliance = null;
-        ApplianceType applianceType = ApplianceType.valueOf(applianceProperties.get(ParserParameter.APPLIANCE_TYPE_KEY));
+        ApplianceType applianceType = ApplianceType.valueOf(applianceProperties.get(ParserParameter.APPLIANCE_TYPE_KEY).toUpperCase());
         AbstractApplianceFactory applianceFactory;
         applianceFactory = factoryMap.get(applianceType);
         if (applianceFactory != null)

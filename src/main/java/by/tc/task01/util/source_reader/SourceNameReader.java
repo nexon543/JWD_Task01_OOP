@@ -7,12 +7,11 @@ public class SourceNameReader {
     private ResourceBundle properties;
 
     public SourceNameReader() {
+        properties = ResourceBundle.getBundle(DBParameter.CONFIG_FILE_PATH);
     }
 
     public String readApplianceFilePath() {
-        properties = ResourceBundle.getBundle(DBParameter.CONFIG_FILE_PATH);
-        String applianceFilePath = properties.getString(DBParameter.APPLIANCE_FILE_PATH_KEY);
-        return applianceFilePath;
+        return properties.getString(DBParameter.APPLIANCE_FILE_PATH_KEY);
     }
 
 }

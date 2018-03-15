@@ -13,6 +13,7 @@ import by.tc.task01.util.appliance_parser.ApplianceRecordParserImpl;
 import by.tc.task01.util.source_reader.ApplianceFileReader;
 import by.tc.task01.util.source_reader.ApplianceFileReaderImpl;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,30 +21,25 @@ import java.util.Map;
 
 public class ApplianceDAOImpl implements ApplianceDAO {
 
-    ApplianceFileReader applianceFileReaderImpl;
-    CriteriaChecker criteriaChecker;
-    ApplianceRecordParser applianceRecordParser;
-    ApplianceFactoryClient applianceFactoryClient;
+    private String EMPTY_STRING="";
+    private CriteriaChecker criteriaChecker;
+    private ApplianceRecordParser applianceRecordParser;
+    private ApplianceFactoryClient applianceFactoryClient;
 
     public ApplianceDAOImpl() {
         applianceRecordParser = new ApplianceRecordParserImpl();
         applianceFactoryClient = new ApplianceFactoryClient();
         criteriaChecker = new CriteriaChecker();
         applianceFactoryClient.addFactroy(ApplianceType.LAPTOP, new LaptopFactory());
-        applianceFileReaderImpl = new ApplianceFileReaderImpl();
     }
 
     public <E> List<Appliance> find(Criteria<E> criteria) throws DAOException {
-        try {
-            applianceFileReaderImpl.openConnection();
-        } catch (IOException ex) {
-            throw new DAOException(DAOException.SOURCE_ERROR);
-        }
-        List<Appliance> applianceList = new ArrayList<Appliance>();
+
+        List<Appliance> applianceList = new ArrayList<>();
         String applianceRecord;
-        try {
-            while ((applianceRecord = applianceFileReaderImpl.read()) != null) {
-                if (!applianceRecord.trim().equals("")) {
+        try (ApplianceFileReader applianceFileReader = new ApplianceFileReaderImpl()) {
+            while ((applianceRecord = applianceFileReader.read()) != null) {
+                if (!applianceRecord.trim().equals(EMPTY_STRING)) {
                     Map<String, String> applianceProperties = applianceRecordParser.parse(applianceRecord);
                     boolean isValid = criteriaChecker.check(applianceProperties, criteria);
                     if (isValid) {
@@ -52,14 +48,12 @@ public class ApplianceDAOImpl implements ApplianceDAO {
                     }
                 }
             }
-
-        } catch (IOException ex) {
+        } catch (FileNotFoundException e) {
+            throw new DAOException(DAOException.CONFIG_FILE_ERROR);
+        } catch (IOException e) {
             throw new DAOException(DAOException.RECORD_ERROR);
-        }
-        try {
-            applianceFileReaderImpl.close();
-        } catch (Exception ex) {
-            throw new DAOException(DAOException.SOURCE_CLOSE_EXCEPTION);
+        } catch (Exception e) {
+            throw new DAOException(DAOException.SOURCE_ERROR);
         }
 
         return applianceList;

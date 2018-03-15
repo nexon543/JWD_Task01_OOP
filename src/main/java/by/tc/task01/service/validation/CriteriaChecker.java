@@ -26,17 +26,15 @@ public class CriteriaChecker {
     }
 
     public <E> boolean check(Map<String, String> applianceProperties, Criteria<E> criteria) {
-        String propertyApplianceType = applianceProperties.get(ParserParameter.APPLIANCE_TYPE_KEY);
-        if (!propertyApplianceType.equals(criteria.getApplianceType()))
+        String propertyApplianceType = applianceProperties.get(ParserParameter.APPLIANCE_TYPE_KEY).toUpperCase();
+        if (!propertyApplianceType.equals(criteria.getApplianceType().toString()))
             return false;
         Set<Map.Entry<E, Object>> criteriaSet = criteria.getCriteria().entrySet();
-        //iteration through all criterias
         for (Map.Entry<E, Object> criteriaEntry : criteriaSet) {
             E criteriaKey = criteriaEntry.getKey();
             String criteriaName = criteriaKey.toString();
             int compareCondition = criteria.getCompareCondition(criteriaKey);
             Object criteriaValue = criteriaEntry.getValue();
-            //checking value of appliance property associated with current criteria by criteriaName
             if (!checkSingleCriteria(criteriaValue, compareCondition, applianceProperties.get(criteriaName)))
                 return false;
         }
@@ -54,7 +52,8 @@ public class CriteriaChecker {
                     float applianceFloatFieldValue = Float.parseFloat(applianceFieldValue + "f");
                     return checkFloat((Float) criteriaValue, compareCondition, applianceFloatFieldValue);
                 case DOUBLE:
-
+                    double applianceDoubleFieldValue = Double.parseDouble(applianceFieldValue);
+                    return checkDouble((Double) criteriaValue, compareCondition, applianceDoubleFieldValue);
                 case STRING:
                     return checkString((String) criteriaValue, applianceFieldValue);
                 default://TODO: add Logger

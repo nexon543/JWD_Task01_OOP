@@ -8,6 +8,4 @@ import java.util.List;
 
 public interface ApplianceService {
     <E> List<Appliance> find(Criteria<E> criteria) throws ServiceException;
-    void applianceFilePath(String applianceFilePath);
-
 }

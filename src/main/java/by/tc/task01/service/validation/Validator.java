@@ -3,6 +3,7 @@ package by.tc.task01.service.validation;
 import by.tc.task01.entity.criteria.Criteria;
 import by.tc.task01.entity.criteria.CriteriaValueType;
 import by.tc.task01.entity.criteria.SearchCriteria;
+import by.tc.task01.util.appliance_parser.ParserParameter;
 
 import java.util.Map;
 import java.util.Set;
@@ -36,5 +37,12 @@ public class Validator {
             }
         }
         return true;
+    }
+
+    public static <T extends Enum> boolean isUnpairedPropertyName(String propertyName) {
+        if(ParserParameter.APPLIANCE_TYPE_KEY.equals(propertyName)){
+            return true;
+        }
+        return false;
     }
 }
