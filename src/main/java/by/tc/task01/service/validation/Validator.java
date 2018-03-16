@@ -3,7 +3,7 @@ package by.tc.task01.service.validation;
 import by.tc.task01.entity.criteria.Criteria;
 import by.tc.task01.entity.criteria.CriteriaValueType;
 import by.tc.task01.entity.criteria.SearchCriteria;
-import by.tc.task01.util.appliance_parser.ParserParameter;
+import by.tc.task01.util.parser.ParserParameter;
 
 import java.util.Map;
 import java.util.Set;

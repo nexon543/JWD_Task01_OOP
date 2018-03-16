@@ -1,8 +1,8 @@
-package by.tc.task01.service.appliance_factory;
+package by.tc.task01.service.factory;
 
 import by.tc.task01.entity.Appliance;
 import by.tc.task01.entity.criteria.ApplianceType;
-import by.tc.task01.util.appliance_parser.ParserParameter;
+import by.tc.task01.util.parser.ParserParameter;
 
 import java.util.HashMap;
 import java.util.Map;

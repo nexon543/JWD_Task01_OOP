@@ -1,4 +1,4 @@
-package by.tc.task01.service.appliance_factory;
+package by.tc.task01.service.factory;
 
 
 import by.tc.task01.entity.Appliance;

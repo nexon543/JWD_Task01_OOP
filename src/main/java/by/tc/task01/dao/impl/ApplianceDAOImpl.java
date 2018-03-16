@@ -5,13 +5,13 @@ import by.tc.task01.dao.exception.DAOException;
 import by.tc.task01.entity.Appliance;
 import by.tc.task01.entity.criteria.ApplianceType;
 import by.tc.task01.entity.criteria.Criteria;
-import by.tc.task01.service.appliance_factory.ApplianceFactoryClient;
-import by.tc.task01.service.appliance_factory.LaptopFactory;
+import by.tc.task01.service.factory.ApplianceFactoryClient;
+import by.tc.task01.service.factory.LaptopFactory;
 import by.tc.task01.service.validation.CriteriaChecker;
-import by.tc.task01.util.appliance_parser.ApplianceRecordParser;
-import by.tc.task01.util.appliance_parser.ApplianceRecordParserImpl;
-import by.tc.task01.util.source_reader.ApplianceFileReader;
-import by.tc.task01.util.source_reader.ApplianceFileReaderImpl;
+import by.tc.task01.util.parser.ApplianceRecordParser;
+import by.tc.task01.util.parser.ApplianceRecordParserImpl;
+import by.tc.task01.util.reader.ApplianceFileReader;
+import by.tc.task01.util.reader.ApplianceFileReaderImpl;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -51,9 +51,9 @@ public class ApplianceDAOImpl implements ApplianceDAO {
         } catch (FileNotFoundException e) {
             throw new DAOException(DAOException.CONFIG_FILE_ERROR);
         } catch (IOException e) {
-            throw new DAOException(DAOException.RECORD_ERROR);
-        } catch (Exception e) {
             throw new DAOException(DAOException.SOURCE_ERROR);
+        } catch (Exception e) {
+            throw new DAOException(DAOException.RECORD_ERROR);
         }
 
         return applianceList;

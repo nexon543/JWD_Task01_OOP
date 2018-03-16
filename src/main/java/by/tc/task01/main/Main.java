@@ -26,7 +26,7 @@ public class Main {
 
         Criteria<SearchCriteria.Laptop> criteriaLaptop = new Criteria<>();
         criteriaLaptop.setApplianceType(ApplianceType.LAPTOP);
-        criteriaLaptop.add(SearchCriteria.Laptop.BATTERY_CAPACITY, 1);
+        criteriaLaptop.add(SearchCriteria.Laptop.BATTERY_CAPACITY, 1f);
         criteriaLaptop.add(SearchCriteria.Laptop.CPU, 1.2);
         Validator.criteriaValidator(criteriaLaptop);
         try {
@@ -35,7 +35,18 @@ public class Main {
         } catch (ServiceException ex) {
             System.out.println(ex.getMessage());
         }
-		
+
+        System.out.println("---------------------------------------------");
+        criteriaLaptop.add(SearchCriteria.Laptop.BATTERY_CAPACITY, 1f,Criteria.MORE);
+        criteriaLaptop.add(SearchCriteria.Laptop.CPU, 1.2, Criteria.MORE);
+        Validator.criteriaValidator(criteriaLaptop);
+        try {
+            appliances = service.find(criteriaLaptop);
+            PrintApplianceInfo.printAll(appliances);
+        } catch (ServiceException ex) {
+            System.out.println("service error code: "+ex.gerErrorCode());
+        }
+
 		/*Criteria<Oven> criteriaOven = new Criteria<Oven>();
 		criteriaOven.setApplianceType("Oven");
 		criteriaOven.add(Oven.CAPACITY, 3);

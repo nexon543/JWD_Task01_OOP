@@ -15,4 +15,7 @@ public class ServiceException extends Exception {
     public int gerErrorCode() {
         return errorCode;
     }
+
+    //public String getErrorCode() {
+    //}
 }

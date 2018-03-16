@@ -1,4 +1,4 @@
-package by.tc.task01.util.source_reader;
+package by.tc.task01.util.reader;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

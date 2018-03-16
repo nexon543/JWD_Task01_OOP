@@ -1,4 +1,4 @@
-package by.tc.task01.util.appliance_parser;
+package by.tc.task01.util.parser;
 
 public class ParserParameter {
 
